@@ -34,7 +34,7 @@
 // }
 
 // src/pages/Login.jsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,11 +46,6 @@ export default function Login() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) navigate("/dashboard");
-  }, []);
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -77,11 +72,13 @@ export default function Login() {
       <input
         type="text"
         placeholder="Enter Email"
+        value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"
         placeholder="Enter Password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin} disabled={loading}>
